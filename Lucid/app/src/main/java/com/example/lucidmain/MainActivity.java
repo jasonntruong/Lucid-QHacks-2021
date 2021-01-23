@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView logo, picture;
+    Animation bounce, blink;
 
     final int REQUEST_IMAGE_CAPTURE = 341;
 
@@ -23,6 +26,28 @@ public class MainActivity extends AppCompatActivity {
         logo = findViewById(R.id.logo);
         picture = findViewById(R.id.picture);
         picture.setAlpha(0);
+
+        bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        blink = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
+
+        logo.startAnimation(bounce);
+
+        bounce.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                logo.startAnimation(blink);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
     }
 
