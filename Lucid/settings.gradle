@@ -1,0 +1,2 @@
+rootProject.name='LucidMain'
+include ':app'

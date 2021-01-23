@@ -1,7 +1,20 @@
 IMPACTFUL:
 
-- MONEY
-- MENTAL HEALTH
-- DISABILITY
-- ELDERLY
-- CHILDREN/TODDLERS
+- MONEY: stock idea looking at graphs
+
+- MENTAL HEALTH: chat idea I: trolls
+
+- DISABILITY: ASL to Text: Import ASL data set to convert to Text
+              VISION IMPAIRMENT: Import general objects data set to convert images to speaker
+        ==> People are only disabled because society makes them disabled
+
+- ELDERLY: 
+
+- CHILDREN/TODDLERS: 
+
+- FOOD: - look at item ==> get ingredients list; link most popular cooking tutorials
+        - motivates ppl to cook more ==> talk abt obesity rate in america
+
+
+        2ND IDEA:
+        - EXTRA: scan to see item; tells you best price
