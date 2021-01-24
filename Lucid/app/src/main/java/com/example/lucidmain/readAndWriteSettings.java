@@ -9,10 +9,15 @@ import java.io.IOException;
 public class readAndWriteSettings {
     FileOutputStream outStream;
     FileInputStream inStream;
+    File mfile;
 
-    protected void writeFile(File file, String message){
+    protected readAndWriteSettings(File file){
+        mfile = file;
+    }
+
+    protected void writeFile(String message){
         try {
-            outStream = new FileOutputStream(file, false);
+            outStream = new FileOutputStream(mfile, false);
             outStream.write(message.getBytes());
             outStream.close();
         } catch (FileNotFoundException e) {
@@ -22,11 +27,11 @@ public class readAndWriteSettings {
         }
     }
 
-    protected String readFile(File file){
-        byte[] bytes = new byte[(int) file.length()];
+    protected String readFile(){
+        byte[] bytes = new byte[(int) mfile.length()];
 
         try {
-            inStream = new FileInputStream(file);
+            inStream = new FileInputStream(mfile);
             inStream.read(bytes);
             inStream.close();
         } catch (FileNotFoundException e) {

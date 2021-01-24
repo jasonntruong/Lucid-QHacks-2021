@@ -1,15 +1,18 @@
 package com.example.lucidmain;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.net.Uri;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,7 +29,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    File dir, settingsData;
     Animation bounceLogo, bounceSettings, blink;
 
     ImageView logo, picture;
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,15 +161,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS){
-                    tts.setSpeechRate((float) 0.9); //lowered speech rate and language set to Canadian English
+                    String data = rw.readFile();    //read the settings.txt file
+                    String[] dataList = data.split(",");
+                    float speed = Float.valueOf(dataList[1])/10;    //speed is on 1-10 scale so get speed value (dataList[1]) and divide by 10
+                    tts.setSpeechRate(speed); //lowered speech rate and language set to Canadian English
+
                     tts.setLanguage(Locale.CANADA);
                 }
             }
         });
 
+        //Files
+        dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        settingsData = new File(dir, "settings.txt");
+
         //Objects
         vis = new visionAPI(getApplicationContext(), tts);
-        rw = new readAndWriteSettings();
+        rw = new readAndWriteSettings(settingsData);
 
         settings.startAnimation(bounceSettings);
 
@@ -203,4 +215,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        finish();
+    }
+
+
 }
