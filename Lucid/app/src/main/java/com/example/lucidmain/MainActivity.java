@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -26,10 +27,11 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    Animation bounce, blink;
+    Animation bounceLogo, bounceSettings, blink;
 
     ImageView logo, picture;
     ImageButton stopButton;
+    Button settings;
 
     String operation;
     Uri photoURI;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     TextToSpeech tts;
 
     visionAPI vis;
+
+    readAndWriteSettings rw;
 
     static final int REQUEST_IMAGE_CAPTURE = 2002;
 
@@ -91,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
                 vis.processImage(photoURI);
             }
 
-            picture.setAlpha(255);  //after the processText or processImage method is finished, we must show the picture ImageView, hide the logo ImageView, and stop the blinking animation
+            picture.setAlpha(255);  //after the processText or processImage method is finished, we must show the picture, hide the logo and settings, and stop the blinking animations
             logo.setAlpha(0);
+            settings.setAlpha(0);
             logo.clearAnimation();
+            settings.clearAnimation();
         }
     }
 
@@ -126,17 +132,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Intent
+        Intent settingsIntent = new Intent(getApplicationContext(), settings.class);
+
         //Animations
-        bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        bounceLogo = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        bounceSettings = AnimationUtils.loadAnimation(this, R.anim.bounce);
         blink = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
 
         //ImageView
-        logo = (ImageView) findViewById(R.id.logo);
-        picture = (ImageView) findViewById(R.id.picture);
+        logo = findViewById(R.id.logo);
+        picture = findViewById(R.id.picture);
         picture.setAlpha(0);    //hide picture ImageView at beginning
 
-        //ButtonView
+        //Buttons
         stopButton = findViewById(R.id.stopButton);
+        settings = findViewById(R.id.settings);
 
         //String
         operation = "";
@@ -152,11 +163,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Object from visionAPI class
+        //Objects
         vis = new visionAPI(getApplicationContext(), tts);
+        rw = new readAndWriteSettings();
 
-        logo.startAnimation(bounce);
-        bounce.setAnimationListener(new Animation.AnimationListener() {
+        settings.startAnimation(bounceSettings);
+
+        logo.startAnimation(bounceLogo);
+        bounceLogo.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -178,6 +192,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tts.stop();
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {    //Settings is designed for a care-giver to help make Lucid perfect for the blind user
+            @Override
+            public void onClick(View v) {
+                startActivity(settingsIntent);
+                tts.speak("Settings", TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }

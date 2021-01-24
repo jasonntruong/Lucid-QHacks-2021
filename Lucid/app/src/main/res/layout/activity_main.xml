@@ -46,6 +46,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:text="settings"
+        app:backgroundTint="#3E3E3E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

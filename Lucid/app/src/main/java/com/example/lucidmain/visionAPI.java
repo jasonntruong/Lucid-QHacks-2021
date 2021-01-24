@@ -28,6 +28,7 @@ public class visionAPI {    //Class that holds methods that uses Google cloud's 
     TextToSpeech mtts;
 
     Context mContext;
+
     protected visionAPI(Context context, TextToSpeech tts){ //object init takes context and tts as we need those 2 variables for the processText and processImage methods
         mContext = context;
         tRec = TextRecognition.getClient();
