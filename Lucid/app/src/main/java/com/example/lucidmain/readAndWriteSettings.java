@@ -15,9 +15,9 @@ public class readAndWriteSettings {
         mfile = file;
     }
 
-    protected void writeFile(String message){
+    protected void writeFile(String message){   //write to file
         try {
-            outStream = new FileOutputStream(mfile, false);
+            outStream = new FileOutputStream(mfile);
             outStream.write(message.getBytes());
             outStream.close();
         } catch (FileNotFoundException e) {
@@ -27,7 +27,7 @@ public class readAndWriteSettings {
         }
     }
 
-    protected String readFile(){
+    protected String readFile(){    //read from file and returns contents as String
         byte[] bytes = new byte[(int) mfile.length()];
 
         try {
@@ -42,5 +42,4 @@ public class readAndWriteSettings {
 
         return new String(bytes);
     }
-
 }

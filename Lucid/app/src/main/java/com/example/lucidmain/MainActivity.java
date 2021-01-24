@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,6 +29,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     File dir, settingsData;
+
     Animation bounceLogo, bounceSettings, blink;
 
     ImageView logo, picture;
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             takePicIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);  //put in the photoURI data in the takePicIntent
             startActivityForResult(takePicIntent, REQUEST_IMAGE_CAPTURE);   //start activity with the takePicIntent to actually take the picture
         }
-
     }
 
     @Override
@@ -215,11 +214,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed(){
         super.onBackPressed();
         finish();
     }
-
-
 }
