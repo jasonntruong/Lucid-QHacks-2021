@@ -7,4 +7,4 @@
  
  https://www.youtube.com/watch?v=IddtCbX6l4Y
  
- I have removed the Google Cloud Service Account associated with this app
+ I have removed the Google Cloud Service Account associated with Lucid
