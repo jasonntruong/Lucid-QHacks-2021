@@ -4,10 +4,10 @@ IMPACTFUL:
 
 - MENTAL HEALTH: chat idea I: trolls
 
-- DISABILITY: ASL to Text: Import ASL data set to convert to Text
-              VISION IMPAIRMENT: Import general objects data set to convert images to speaker
-        ==> People are only disabled because society makes them disabled
-
+- DISABILITY: 
+              VISION IMPAIRMENT: Import general objects data set to convert images to speaker -->  
+                ==> People are only disabled because society makes them disabled
+              SECONDARY: ASL to Text: Import ASL data set to convert to Text
 - ELDERLY: 
 
 - CHILDREN/TODDLERS: 
@@ -18,3 +18,5 @@ IMPACTFUL:
 
         2ND IDEA:
         - EXTRA: scan to see item; tells you best price
+
+
